@@ -1,0 +1,3 @@
+- insert:
+    - id: goal-history
+      name: '@ryuu-64/dsh-goal-history'

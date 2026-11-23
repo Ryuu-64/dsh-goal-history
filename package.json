@@ -1,0 +1,80 @@
+{
+  "name": "@ryuu-64/dsh-goal-history",
+  "version": "0.1.1",
+  "description": "Review goals in DeepSeek Harness (DSH): keep completed goals, their token usage, and every past goal of the conversation visible in the chat and a read-only history page.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Ryuu-64",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "lib",
+    "locale/*.json",
+    "cordis.patch.yml",
+    "README.md",
+    "docs",
+    "LICENSE",
+    "NOTICE.md",
+    "CHANGELOG.md",
+    "icon.svg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ryuu-64/dsh-goal-history.git"
+  },
+  "homepage": "https://github.com/Ryuu-64/dsh-goal-history#readme",
+  "bugs": {
+    "url": "https://github.com/Ryuu-64/dsh-goal-history/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "goal",
+    "goals",
+    "goal-history",
+    "token-usage",
+    "conversation-history"
+  ],
+  "engines": {
+    "node": "^22.19.0 || ^24.0.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check lib/index.js && node --check lib/fold.js && node --check lib/client.js && npm test"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0",
+    "@deepseek-ai/dsh-api-session-controller": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-client-locale": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-client-ui-chat": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-client-ui-conversation": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-client-ui-sidebar-right": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-session-projection": "0.2.2-rc.3"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-chat",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    }
+  }
+}
