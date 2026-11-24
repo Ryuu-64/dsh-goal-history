@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2
+
+- Use DSH's own wording for rounds and token usage: 执行轮次 / Rounds, Goal
+  Round, Round 上限, 自动续行, and 用量.
+- Remove the per-change round snapshot from the goal change list; a goal row
+  shows one execution-rounds value, as the goal detail card does.
+- Explain rounds started versus the round cap in the README and compatibility
+  notes, including the zero-round completed case.
+
 ## 0.1.1
 
 - Show a goal's token usage on the completion card and on each Goals page row.

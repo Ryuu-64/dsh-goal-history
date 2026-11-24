@@ -4,11 +4,11 @@ English | [简体中文](https://github.com/Ryuu-64/dsh-goal-history/blob/main/d
 
 npm: [@ryuu-64/dsh-goal-history](https://www.npmjs.com/package/@ryuu-64/dsh-goal-history) · Maintained by [Ryuu-64](https://github.com/Ryuu-64).
 
-Keep a conversation's goals reviewable after they finish. DSH hides the goal bar when a goal completes, so the objective, its result, and what it cost scroll out of sight. This plugin leaves a record in the chat and adds a read-only history page beside it.
+Keep a conversation's goals reviewable after they finish. DSH hides the goal bar when a goal completes, so the objective, its result, and its token usage scroll out of sight. This plugin leaves a record in the chat and adds a read-only history page beside it.
 
 ## See it in action
 
-A completed goal keeps its objective, round count, completion time, and token usage under the turn that finished it. The same conversation's goals are listed in the right sidebar.
+A completed goal keeps its objective, rounds started versus the round cap, completion time, and token usage under the turn that finished it. The same conversation's goals are listed in the right sidebar.
 
 ![DSH chat showing a completed goal card and the Goals page with two completed goals](https://raw.githubusercontent.com/Ryuu-64/dsh-goal-history/main/docs/screenshots/goal-history.png)
 
@@ -16,21 +16,27 @@ A completed goal keeps its objective, round count, completion time, and token us
 
 ## What it adds
 
-- **A completed-goal card under the turn that completed it.** The card shows the objective as recorded at completion, the round count, the completion time, and the goal's token usage, with a link to the full history. It sits outside the collapsible tool group, like the built-in plan and schedule cards.
-- **A Goals page in the right sidebar.** It lists the current goal and every past goal of the conversation, including cleared ones. Each row shows status, objective, rounds, timestamps, and token usage; expanding a row shows its revision trail and any blocker reason. The page also shows a token total across the conversation's goals.
+- **A completed-goal card under the turn that completed it.** The card shows the objective as recorded at completion, rounds started versus the round cap, the completion time, and the goal's token usage, with a link to the full history. It sits outside the collapsible tool group, like the built-in plan and schedule cards.
+- **A Goals page in the right sidebar.** It lists the current goal and every past goal of the conversation, including cleared ones. Each row shows phase, objective, rounds started versus the round cap, timestamps, and token usage; expanding a row shows its goal changes and any blocker reason. The page also shows a token usage total across the conversation's goals.
 - **A goal button in the session header.** It appears only when the conversation records at least one goal and opens the Goals page.
 - **The full list comes from the Host, not from the loaded chat window.** The page can show goals from earlier in a long conversation without scrolling the transcript first.
 
 The current goal's bar, and every edit, pause, resume, or clear action, stay with DSH itself. This plugin only reads and presents.
 
+## Execution rounds
+
+A goal records **rounds started** and a **round cap** (`maxGoalRounds`). A **Goal Round** is one automatic continuation: when the agent is idle, the goal is active and armed, and the cap has room, the goal round driver admits one goal-sourced message so the model gets another turn toward the objective. Only an admitted goal message advances the count; reaching the cap records a `round-limit` blocker.
+
+The plugin shows this as **Rounds** (`执行轮次` in Chinese) `started / cap`. A completed goal may have used zero rounds when it finished in the original turn; the cap is an allowance, not a plan. The plugin does not show a separate round snapshot on every goal change; that was an implementation detail and read like a per-operation count.
+
 ## Token usage
 
-`goal/change` records do not carry token counts. Token usage is recorded on each final assistant message, so the plugin sums the assistant usage that occurred while a goal was current: from the goal's `create` event to its `complete` or `clear` event. The total includes input, output, cache-read, and cache-write tokens, the same buckets as DSH's own usage footer. Hovering a token number shows the breakdown.
+`goal/change` records do not carry token counts. Token usage is recorded on each final assistant message, so the plugin sums the assistant usage that occurred while a goal was current: from the goal's `create` event to its `complete` or `clear` event. The total includes uncached input, output, cached input, and cache write, the same buckets as DSH's own usage footer. Hovering a token number shows the breakdown.
 
 This is a review number, not a billing statement:
 
 - Messages before the goal was created and messages after it completed or was cleared are not counted.
-- A goal that stays active across several turns accumulates usage from all of them.
+- A goal that stays active across several Goal Rounds accumulates usage from all of them.
 - Messages without recorded usage are not counted.
 - Several goals in one conversation are reported separately; the page total is their sum.
 
@@ -43,7 +49,7 @@ Ask an AI assistant that can operate your computer:
 ## Try it
 
 1. In a DSH conversation, set a goal and let the assistant work on it until it completes, or ask it to create and complete a test goal.
-2. Open the goal button in the session header. The Goals page lists the goal with its objective, rounds, timestamps, and token usage.
+2. Open the goal button in the session header. The Goals page lists the goal with its objective, rounds started versus the round cap, timestamps, and token usage.
 3. Scroll to the completing turn. The completed-goal card shows the same record under the closing reply.
 4. Refresh or reopen the conversation; both surfaces rebuild from the saved session.
 
@@ -51,11 +57,12 @@ Ask an AI assistant that can operate your computer:
 
 | Record | Chat card | Goals page |
 | --- | --- | --- |
-| Active, paused, or blocked goal | No; the goal bar shows it | Yes, under Current |
-| Completed goal | Yes, under the completing turn | Yes, under Past |
-| Cleared goal | No | Yes, under Past, with the last objective |
+| Active, paused, or blocked goal | No; the goal bar shows it | Yes, under Current goal |
+| Completed goal | Yes, under the completing turn | Yes, under Past goals |
+| Cleared goal | No | Yes, under Past goals, with the last objective |
 | Goal replaced by a new goal | Yes, for each completed goal | Yes, one row per goal |
-| Revision trail and blocker reason | No | Yes, expand the row |
+| Goal changes and blocker reason | No | Yes, expand the row |
+| Rounds started versus the round cap | Yes, on the completion card | Yes, on each row |
 | Token usage | Yes, on the completion card | Yes, on each row and as a page total |
 
 ## Limits
@@ -69,7 +76,7 @@ Ask an AI assistant that can operate your computer:
 
 ## Compatibility
 
-Built and verified against DeepSeek Harness `0.2.2-rc.3` (Desktop `2.0.23-next`) on Windows. The plugin uses the public `goal/change` event, one Host session projection, and three public client slots; it makes no model calls and sends no conversation data outside DSH. See [compatibility notes](https://github.com/Ryuu-64/dsh-goal-history/blob/main/docs/compatibility.md) for the exact attachment points and token-accounting rules.
+Built and verified against DeepSeek Harness `0.2.2-rc.3` (Desktop `2.0.23-next`) on Windows. The plugin uses the public `goal/change` event, one Host session projection, and three public client slots; it makes no model calls and sends no conversation data outside DSH. See [compatibility notes](https://github.com/Ryuu-64/dsh-goal-history/blob/main/docs/compatibility.md) for the exact attachment points, execution-round semantics, and token-accounting rules.
 
 When updating an installed copy, restart DSH so the Host half reloads and a conversation refolds its goal history. A browser refresh reloads only the client half; a long-running Host can otherwise keep the goal state produced before the update.
 
