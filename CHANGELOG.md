@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+- Match the current goal's status to DSH's native goal bar after reopening a conversation, resuming, or pausing. Show an unconfirmed status while live continuation state is unavailable.
+- Make round counts and timestamps easier to read with DSH's secondary text color and a default size of 12 px that follows the host's font setting.
+
 ## 0.1.3
 
 - Update execution rounds as DSH admits them and preserve the last count when a goal is cleared. Existing sessions rebuild the count from their saved events after restarting DSH with the update.
