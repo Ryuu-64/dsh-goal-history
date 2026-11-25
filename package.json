@@ -1,6 +1,6 @@
 {
   "name": "@ryuu-64/dsh-goal-history",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Review goals in DeepSeek Harness (DSH): keep completed goals, their token usage, and every past goal of the conversation visible in the chat and a read-only history page.",
   "type": "module",
   "license": "MIT",

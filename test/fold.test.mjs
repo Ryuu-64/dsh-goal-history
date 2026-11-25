@@ -27,6 +27,15 @@ function message(seq, usage) {
   }
 }
 
+function continuation(seq, overrides = {}) {
+  return {
+    type: 'user/message',
+    seq,
+    time: seq * 1000,
+    data: { source: { kind: 'goal', goalId: 'goal-1', revision: 1, round: 1, ...overrides } },
+  }
+}
+
 /**
  * Build one full-snapshot change payload.
  * @param operation - lifecycle verb.
@@ -96,7 +105,49 @@ test('clear keeps the last objective as a cleared record', () => {
   assert.equal(state.goals[0].changes.at(-1).operation, 'clear')
 })
 
-test('resume drops a previous blocker reason', () => {
+test('an admitted round updates the current goal and survives a direct clear', () => {
+  const created = applyGoalHistory(createGoalHistoryState(), change(10, snapshot('create')))
+  const admitted = applyGoalHistory(created, continuation(11))
+  assert.equal(created.goals[0].roundsStarted, 0)
+  assert.equal(viewGoalHistory(admitted).goals[0].roundsStarted, 1)
+  assert.equal(admitted.goals[0].changes, created.goals[0].changes)
+
+  const cleared = applyGoalHistory(admitted, change(12, {
+    kind: 'goal/change',
+    version: 1,
+    operation: 'clear',
+    cleared: { id: 'goal-1', revision: 2 },
+    clearedAt: 12000,
+  }))
+  assert.equal(cleared.goals[0].status, 'cleared')
+  assert.equal(cleared.goals[0].roundsStarted, 1)
+  assert.equal(cleared.goals[0].changes.at(-1).roundsStarted, 1)
+  assert.equal(applyGoalHistory(cleared, continuation(13, { round: 2 })), cleared)
+})
+
+test('only the next round of the active revision within its cap counts', () => {
+  const created = applyGoalHistory(createGoalHistoryState(), change(10, snapshot('create', { maxGoalRounds: 2 })))
+  for (const source of [{ kind: 'user' }, { goalId: 'other' }, { revision: 2 }, { round: 0 }, { round: 2 }]) {
+    assert.equal(applyGoalHistory(created, continuation(11, source)), created)
+  }
+  const admitted = applyGoalHistory(created, continuation(11))
+  assert.equal(applyGoalHistory(admitted, continuation(12)), admitted)
+
+  const paused = applyGoalHistory(admitted, change(13, {
+    ...snapshot('pause', { phase: 'paused', maxGoalRounds: 2 }), roundsStarted: 1,
+  }))
+  assert.equal(applyGoalHistory(paused, continuation(14, { revision: 2, round: 2 })), paused)
+
+  const resumed = applyGoalHistory(paused, change(15, {
+    ...snapshot('resume', { revision: 3, maxGoalRounds: 2 }), roundsStarted: 1,
+  }))
+  assert.equal(applyGoalHistory(resumed, continuation(16, { revision: 2, round: 2 })), resumed)
+  const capped = applyGoalHistory(resumed, continuation(16, { revision: 3, round: 2 }))
+  assert.equal(capped.goals[0].roundsStarted, 2)
+  assert.equal(applyGoalHistory(capped, continuation(17, { revision: 3, round: 3 })), capped)
+})
+
+test('resume clears the current blocker while preserving its historical reason', () => {
   let state = createGoalHistoryState()
   state = applyGoalHistory(state, change(10, snapshot('create')))
   state = applyGoalHistory(state, change(20, snapshot('block', {
@@ -106,6 +157,7 @@ test('resume drops a previous blocker reason', () => {
   assert.equal(state.goals[0].blockedReason.message, 'rounds exhausted')
   state = applyGoalHistory(state, change(30, snapshot('resume', { phase: 'active', revision: 3 })))
   assert.equal(state.goals[0].blockedReason, undefined)
+  assert.equal(state.goals[0].changes.find(item => item.operation === 'block').blockedReason.message, 'rounds exhausted')
 })
 
 test('usage between create and complete belongs to the goal', () => {

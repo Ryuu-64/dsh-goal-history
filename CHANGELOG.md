@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+- Update execution rounds as DSH admits them and preserve the last count when a goal is cleared. Existing sessions rebuild the count from their saved events after restarting DSH with the update.
+- Show expandable explanations for token usage during a goal on the completion card and Goals page.
+- Show the previous and revised objective, changes to the round cap, and each recorded blocker reason in the goal timeline.
+
 ## 0.1.2
 
 - Use DSH's own wording for rounds and token usage: 执行轮次 / Rounds, Goal
