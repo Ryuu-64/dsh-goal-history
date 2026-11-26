@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Remove the README screenshot and restrict packaged documentation to the two Markdown files.
+
 ## 0.1.4
 
 - Match the current goal's status to DSH's native goal bar after reopening a conversation, resuming, or pausing. Show an unconfirmed status while live continuation state is unavailable.
