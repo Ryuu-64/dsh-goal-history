@@ -8,7 +8,7 @@ Keep a conversation's goals reviewable after they finish. DSH hides the goal bar
 
 ## What it adds
 
-- **A completed-goal card under the turn that completed it.** The card shows the objective as recorded at completion, rounds started versus the round cap, the completion time, and the goal's token usage, with a link to the full history. It sits outside the collapsible tool group, like the built-in plan and schedule cards.
+- **A completed-goal card under the closing reply.** It shows the completion status and recorded token total. Select **View goal** to open that goal in the history page.
 - **A Goals page in the right sidebar.** It lists the current goal and every past goal of the conversation, including cleared ones. Expand a goal row to see its timeline. An edit shows what changed in the objective or round cap, and a blocked entry keeps its original reason after the goal resumes. The page totals the recorded usage across all goal periods.
 - **A goal button in the session header.** It appears only when the conversation records at least one goal and opens the Goals page.
 - **The full list comes from the Host, not from the loaded chat window.** The page can show goals from earlier in a long conversation without scrolling the transcript first.
@@ -23,7 +23,7 @@ The plugin shows this as **Rounds** (`执行轮次` in Chinese) `started / cap`.
 
 ## Token usage
 
-**Usage during goal** adds the usage recorded on assistant replies between the goal's creation and its completion or clear. Open the usage label to see which replies count and, for an individual goal, the breakdown into uncached input, output, cache reads, and cache writes.
+**Usage during goal** adds the usage recorded on assistant replies between the goal's creation and its completion or clear. On the Goals page, open the usage label to see which replies count and, for an individual goal, the breakdown into uncached input, output, cache reads, and cache writes.
 
 This is a review number, not a billing statement:
 
@@ -42,7 +42,7 @@ Ask an AI assistant that can operate your computer:
 
 1. In a DSH conversation, set a goal and let the assistant work on it until it completes, or ask it to create and complete a test goal.
 2. Open the goal button in the session header. The Goals page lists the goal with its objective, rounds started versus the round cap, timestamps, and token usage.
-3. Scroll to the completing turn. The completed-goal card shows the same record under the closing reply.
+3. Scroll to the completing turn. Select **View goal** on the card to jump to that goal in the history.
 4. Refresh or reopen the conversation; both surfaces rebuild from the saved session.
 
 ## What stays visible
@@ -54,8 +54,8 @@ Ask an AI assistant that can operate your computer:
 | Cleared goal | No | Yes, under Past goals, with the last objective |
 | Goal replaced by a new goal | Yes, for each completed goal | Yes, one row per goal |
 | Goal changes and blocker reasons | No | Yes, expand the row and the relevant change |
-| Rounds started versus the round cap | Yes, on the completion card | Yes, on each row |
-| Token usage | Yes, on the completion card | Yes, on each row and as a page total |
+| Objective, rounds, and timestamps | No | Yes, on each row |
+| Token usage | Recorded total | Per-goal totals and breakdowns, plus a page total |
 
 ## Limits
 
