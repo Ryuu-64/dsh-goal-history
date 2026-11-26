@@ -6,14 +6,6 @@ npm: [@ryuu-64/dsh-goal-history](https://www.npmjs.com/package/@ryuu-64/dsh-goal
 
 Keep a conversation's goals reviewable after they finish. DSH hides the goal bar when a goal completes, so the objective, its result, and its token usage scroll out of sight. This plugin leaves a record in the chat and adds a read-only history page beside it.
 
-## See it in action
-
-A completed goal keeps its objective, rounds started versus the round cap, completion time, and token usage under the turn that finished it. The same conversation's goals are listed in the right sidebar.
-
-![DSH chat showing a completed goal card and the Goals page with two completed goals](https://raw.githubusercontent.com/Ryuu-64/dsh-goal-history/main/docs/screenshots/goal-history.png)
-
-*The conversation and its Goals page, shown in Simplified Chinese.*
-
 ## What it adds
 
 - **A completed-goal card under the turn that completed it.** The card shows the objective as recorded at completion, rounds started versus the round cap, the completion time, and the goal's token usage, with a link to the full history. It sits outside the collapsible tool group, like the built-in plan and schedule cards.

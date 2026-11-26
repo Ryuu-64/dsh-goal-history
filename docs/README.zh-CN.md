@@ -6,14 +6,6 @@ npm：[`@ryuu-64/dsh-goal-history`](https://www.npmjs.com/package/@ryuu-64/dsh-g
 
 目标完成以后，DSH 会把输入框上方的目标条隐藏，目标正文、结果和 Token 用量就滚出了视野。这个插件把目标记录留在聊天里，并在右侧栏加一个只读的历史页。
 
-## 效果
-
-目标完成的那一轮末尾会留一张卡：目标原文、执行轮次、完成时间、Token 用量，以及“查看目标”。同一个对话的全部目标都在右侧栏的“目标”页里。
-
-![DSH 聊天里的已完成目标卡片，以及右侧栏列出两个已完成目标的目标页](https://raw.githubusercontent.com/Ryuu-64/dsh-goal-history/main/docs/screenshots/goal-history.png)
-
-*截图使用简体中文界面。*
-
 ## 它增加了什么
 
 - **聊天里的完成卡**：放在目标完成那一轮回答的末尾，工具折叠区之外。显示完成时的目标原文、执行轮次、完成时间和 Token 用量。
