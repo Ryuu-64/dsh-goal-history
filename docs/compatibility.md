@@ -13,8 +13,8 @@
 
 ## 版本
 
-- 构建与实测：DeepSeek Harness `0.2.2-rc.3`，Desktop `2.0.23-next`，Windows，Electron 44 / Node 24。
-- 插件声明的 peer 范围与此一致；`0.2.2-rc.3` 之外的版本没有实测，不推断兼容。
+- `0.1.6` 支持 DSH `0.2.2-rc.3` 和 `0.2.2-rc.5`。官方 `0.2.2-rc.5` 安装器可直接安装；Windows 上的 DSH Web 实测了完成卡、历史目标页、用量及原生语言切换。
+- `0.2.2-rc.3` 的历史验收环境包括 Windows Desktop `2.0.23-next`（Electron 44 / Node 24）。
 - 会话事件使用 `goal/change` v1、`user/message.data.source` 的 `goal` 来源和 `assistant/message.data.usage`。客户端使用上文列出的三个公开插槽。
 
 ## 更新或启用时机

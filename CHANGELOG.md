@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Support DSH `0.2.2-rc.5` and retain `0.2.2-rc.3` support.
+
 ## 0.1.5
 
 - Update open Goals tab titles and history timestamps when the DSH interface language changes.
