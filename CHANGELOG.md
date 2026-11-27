@@ -2,6 +2,9 @@
 
 ## 0.1.5
 
+- Update open Goals tab titles and history timestamps when the DSH interface language changes.
+- Show the Simplified Chinese manual on the plugin detail page in Chinese mode.
+- Compact the completed-goal card to the completion status, recorded token total, and a link to the matching history entry.
 - Remove the README screenshot and restrict packaged documentation to the two Markdown files.
 
 ## 0.1.4
