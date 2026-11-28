@@ -1,1 +1,1 @@
-{ "meta": { "title": "Goal History", "description": "Keep completed goals visible in the chat and review every goal of the conversation, including cleared ones, in a read-only history page.", "detail": "README.md" } }
+{ "meta": { "title": "Goal History", "description": "Review completed DeepSeek Harness goals, execution rounds, and recorded token usage for each goal in a read-only sidebar.", "detail": "README.md" } }

@@ -2,7 +2,7 @@
 
 English | [简体中文](https://github.com/Ryuu-64/dsh-goal-history/blob/main/docs/README.zh-CN.md)
 
-npm: [@ryuu-64/dsh-goal-history](https://www.npmjs.com/package/@ryuu-64/dsh-goal-history) · Maintained by [Ryuu-64](https://github.com/Ryuu-64).
+npm: [@ryuu-64/dsh-goal-history](https://www.npmjs.com/package/@ryuu-64/dsh-goal-history) · Maintained by [Ryuu-64](https://github.com/Ryuu-64). · [Plugin page](https://ryuu-64.github.io/dsh/en/dsh-goal-history/)
 
 Keep a conversation's goals reviewable after they finish. DSH hides the goal bar when a goal completes, so the objective, its result, and its token usage scroll out of sight. This plugin leaves a record in the chat and adds a read-only history page beside it.
 
@@ -34,9 +34,19 @@ This is a review number, not a billing statement:
 
 ## Install
 
-Ask an AI assistant that can operate your computer:
+**Desktop**
 
-> Install this plugin in my DSH setup, check compatibility, and confirm it is enabled: https://github.com/Ryuu-64/dsh-goal-history
+```sh
+dsh plugin --profile desktop add @ryuu-64/dsh-goal-history
+```
+
+**Web**
+
+```sh
+dsh plugin --profile web add @ryuu-64/dsh-goal-history
+```
+
+Supported DSH versions: `0.2.2-rc.3` and `0.2.2-rc.5`. See the [compatibility notes](https://github.com/Ryuu-64/dsh-goal-history/blob/main/docs/compatibility.md) for verified hosts.
 
 ## Try it
 

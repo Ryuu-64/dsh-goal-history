@@ -1,7 +1,7 @@
 {
   "name": "@ryuu-64/dsh-goal-history",
   "version": "0.1.6",
-  "description": "Review goals in DeepSeek Harness (DSH): keep completed goals, their token usage, and every past goal of the conversation visible in the chat and a read-only history page.",
+  "description": "Review completed DeepSeek Harness goals, execution rounds, and recorded token usage for each goal in a read-only sidebar.",
   "type": "module",
   "license": "MIT",
   "author": "Ryuu-64",
@@ -29,7 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/Ryuu-64/dsh-goal-history.git"
   },
-  "homepage": "https://github.com/Ryuu-64/dsh-goal-history#readme",
+  "homepage": "https://ryuu-64.github.io/dsh/en/dsh-goal-history/",
   "bugs": {
     "url": "https://github.com/Ryuu-64/dsh-goal-history/issues"
   },
@@ -44,6 +44,7 @@
     "goal",
     "goals",
     "goal-history",
+    "execution-rounds",
     "token-usage",
     "conversation-history"
   ],

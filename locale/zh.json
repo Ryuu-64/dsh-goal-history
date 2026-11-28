@@ -1,1 +1,1 @@
-{ "meta": { "title": "目标历史", "description": "把已完成的目标留在聊天里，并在只读的历史页中查看这个对话的全部目标，包括已清除的目标。", "detail": "docs/README.zh-CN.md" } }
+{ "meta": { "title": "目标历史", "description": "回看 DeepSeek Harness 已完成的 Goal、执行轮次及每个目标期间记录的 Token 用量。", "detail": "docs/README.zh-CN.md" } }

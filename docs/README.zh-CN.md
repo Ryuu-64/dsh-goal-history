@@ -2,7 +2,7 @@
 
 [English](../README.md) | 简体中文
 
-npm：[`@ryuu-64/dsh-goal-history`](https://www.npmjs.com/package/@ryuu-64/dsh-goal-history) · 维护者：[Ryuu-64](https://github.com/Ryuu-64)
+npm：[`@ryuu-64/dsh-goal-history`](https://www.npmjs.com/package/@ryuu-64/dsh-goal-history) · 维护者：[Ryuu-64](https://github.com/Ryuu-64) · [插件页面](https://ryuu-64.github.io/dsh/dsh-goal-history/)
 
 目标完成以后，DSH 会把输入框上方的目标条隐藏，目标正文、结果和 Token 用量就滚出了视野。这个插件把目标记录留在聊天里，并在右侧栏加一个只读的历史页。
 
@@ -34,9 +34,19 @@ goal 记录两个值：**已开始的 Round 数**（`roundsStarted`）和 **Roun
 
 ## 安装
 
-把下面这句话交给能操作电脑的 AI 助手：
+**桌面版**
 
-> 在我的 DSH 里安装这个插件，检查兼容性并确认它已启用：https://github.com/Ryuu-64/dsh-goal-history
+```sh
+dsh plugin --profile desktop add @ryuu-64/dsh-goal-history
+```
+
+**Web 版**
+
+```sh
+dsh plugin --profile web add @ryuu-64/dsh-goal-history
+```
+
+支持 DSH `0.2.2-rc.3` 和 `0.2.2-rc.5`。 实测环境见[兼容说明](https://github.com/Ryuu-64/dsh-goal-history/blob/main/docs/compatibility.md)。
 
 ## 试用
 
